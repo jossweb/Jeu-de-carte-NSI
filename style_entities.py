@@ -30,3 +30,20 @@ def add_background(window):
     image = PhotoImage(file="plateau-en-bois.ppm")
     label = Label(window, image=image)
     label.place(x=0, y=0, relwidth=1, relheight=1)
+
+def add_label(window, text, foreground, background, width, height,
+              padding_x, padding_y):
+        """Ajoute un label personnalisé avec les paramètres de la fonction"""
+        custom_label = Label(
+            window, 
+            text = text, 
+            font =("Helvetica", 16, "bold"), 
+            fg = foreground, 
+            bg = background, 
+            width = width, 
+            height = height, 
+            relief = RAISED, 
+            bd = 3, 
+            padx = padding_x, 
+            pady = padding_y)
+        custom_label.pack()

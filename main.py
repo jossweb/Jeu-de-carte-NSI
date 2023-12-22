@@ -18,6 +18,9 @@ window = create_principal_window()
 image = PhotoImage(file="plateau-en-bois.ppm")
 label = Label(window, image=image)
 label.place(x=0, y=0, relwidth=1, relheight=1)
-
 # Lancer la boucle principale de la fenêtre
+
+add_label(window, )
+
+
 window.mainloop()
