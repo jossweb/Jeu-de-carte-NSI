@@ -42,6 +42,10 @@ def set_button_setting(click_link, window, style_json_path = None):
     if style_json_path is not None:
         style_button = Deserialization_json(style_json_path)
 
+        font_data = style_button.get("font", {})
+        font_family = font_data.get("family", "Arial")
+        font_size = font_data.get("size", 14)
+
         # Configuraton du bouton avec les attributs du json
         button.configure(
             text = style_button.get("text"),
@@ -52,8 +56,10 @@ def set_button_setting(click_link, window, style_json_path = None):
             border_color = style_button.get("border_color"),
             bg_color = style_button.get("bg_color"),
             fg_color = style_button.get("fg_color"),
+            text_color = style_button.get("text_color"),
             hover_color = style_button.get("hover_color"),
-            state = style_button.get("normal")
+            state = style_button.get("normal"),
+            font = (font_family, font_size)
         )
 
     return button
