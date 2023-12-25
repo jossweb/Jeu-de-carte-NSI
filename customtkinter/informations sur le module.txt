@@ -1,0 +1,5 @@
+Module crée par Tom Schimansky, modifié et optimisé par FIGUEIRAS Jossua pour les besoins du projet
+
+Documentation du module à retrouver sur https://customtkinter.tomschimansky.com
+
+Lien vers le repository github : https://github.com/tomschimansky/customtkinter 

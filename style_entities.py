@@ -31,3 +31,6 @@ def add_background(window):
     image = PhotoImage(file="plateau-en-bois.ppm")
     label = Label(window, image=image)
     label.place(x=0, y=0, relwidth=1, relheight=1)
+
+def set_button_setting():
+    

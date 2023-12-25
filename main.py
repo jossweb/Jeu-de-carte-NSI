@@ -2,7 +2,7 @@
 from tkinter import *
 from tkinter import ttk
 
-from customtkinter import *
+import customtkinter
 
 # import de module internes au projet
 from style_entities import *
@@ -34,8 +34,7 @@ canvas.create_image(0, 0, anchor=NW, image=BACKGROUND_IMAGE)
 #ajout du texte de bienvenue
 canvas.create_text(500, 50, text="Bienvenue", font="calibri 45 italic", fill="white")
 
-button = ttk.Button(window, text="Jouer !", command=on_button_click)
+button = customtkinter.CTkButton(window, text="Jouer !", command=on_button_click)
 canvas.create_window(500, 200, window=button)
-
 
 window.mainloop()
