@@ -1,6 +1,12 @@
 {
+    "text": "Jouer !",
+    "width": 500,
+    "height": 200,
     "corner_radius": 10,
     "border_width": 10,
-    "fg_color": "#000",
-    "hover_color": "#ddd"
+    "border_color": "#000",
+    "bg_color": "transparent",
+    "fg_color": "#fff",
+    "hover_color": "#ddd",
+    "state": "normal"
 }

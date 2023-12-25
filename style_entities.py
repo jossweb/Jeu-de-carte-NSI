@@ -44,10 +44,16 @@ def set_button_setting(click_link, window, style_json_path = None):
 
         # Configuraton du bouton avec les attributs du json
         button.configure(
-            corner_radius=style_button.get("corner_radius", 0),
-            border_width=style_button.get("border_width", 0),
-            fg_color=style_button.get("fg_color", ""),
-            hover_color=style_button.get("hover_color", "")
+            text = style_button.get("text"),
+            width = style_button.get("width"),
+            height = style_button.get("height"),
+            corner_radius = style_button.get("corner_radius"),
+            border_width = style_button.get("border_width"),
+            border_color = style_button.get("border_color"),
+            bg_color = style_button.get("bg_color"),
+            fg_color = style_button.get("fg_color"),
+            hover_color = style_button.get("hover_color"),
+            state = style_button.get("normal")
         )
 
     return button
