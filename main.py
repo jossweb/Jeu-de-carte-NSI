@@ -34,7 +34,7 @@ canvas.create_image(0, 0, anchor=NW, image=BACKGROUND_IMAGE)
 #ajout du texte de bienvenue
 canvas.create_text(500, 50, text="Bienvenue", font="calibri 45 italic", fill="white")
 
-button = customtkinter.CTkButton(window, text="Jouer !", command=on_button_click)
+button = set_button_setting(on_button_click(), window, "json/style_button_play.json")
 canvas.create_window(500, 200, window=button)
 
 window.mainloop()
