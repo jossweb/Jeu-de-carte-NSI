@@ -5,7 +5,7 @@ from tkinter import ttk
 import customtkinter
 
 # import de module internes au projet
-from style_entities import *
+from style import *
 
 def create_principal_window():
     """Cette fonction renvoie la fenêtre dont les paramètres sont définis"""

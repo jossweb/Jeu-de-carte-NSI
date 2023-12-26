@@ -1,8 +1,7 @@
 from tkinter import *
 from PIL import Image, ImageTk
 from customtkinter import CTkButton
-
-from back import *
+import json
 
 def set_window_setting(window, type):
     """Cette fonction donne les paramètres à la fenêtre et prend 
@@ -64,3 +63,8 @@ def set_button_setting(click_link, window, style_json_path = None):
         )
 
     return button
+
+def Deserialization_json(json_path):
+    with open(json_path, "r") as fichier:
+        json_data = fichier.read()
+    return json.loads(json_data)
