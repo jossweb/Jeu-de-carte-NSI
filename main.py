@@ -12,7 +12,8 @@ import back
 SIZE_WINDOW_WELCOME = [800, 400]
 SIZE_WINDOW_GAME = [1000, 600]
 
-def play_button_click():
+def play_button_click(window):
+    window.destroy()
     main_game_page()
 
 def main_welcome_page():
@@ -31,9 +32,8 @@ def main_welcome_page():
     #ajout du texte de bienvenue
     canvas.create_text(400, 50, text="Bienvenue", font="calibri 45 italic", fill="white")
 
-    button = style.set_button_setting(play_button_click, window, "json/style_button_play.json")
+    button = style.set_button_setting(lambda: play_button_click(window), window, "json/style_button_play.json")
     canvas.create_window(400, 200, window=button)
-
 
     window.mainloop()
 
