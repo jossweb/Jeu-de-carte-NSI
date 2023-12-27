@@ -34,7 +34,7 @@ def main_welcome_page():
 
     button = style.set_button_setting(lambda: play_button_click(window), window, "json/style_button_play.json")
     canvas.create_window(400, 200, window=button)
-
+#
     window.mainloop()
 
 def main_game_page():
