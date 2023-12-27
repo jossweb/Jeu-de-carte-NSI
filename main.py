@@ -17,25 +17,30 @@ def create_principal_window():
 def on_button_click():
     print("Bouton cliqué !")
 
-window = create_principal_window()
-BACKGROUND_IMAGE = PhotoImage(file="plateau-en-bois.ppm")
+def __main__():
 
-#création du Canvas
-canvas = Canvas(window, width=1000, height=600)
-canvas.pack()
+    window = create_principal_window()
+    BACKGROUND_IMAGE = PhotoImage(file="plateau-en-bois.ppm")
 
-style = ttk.Style()
-style.configure('TButton', font=('Helvetica', 12), 
+    #création du Canvas
+    canvas = Canvas(window, width=1000, height=600)
+    canvas.pack()
+
+    style = ttk.Style()
+    style.configure('TButton', font=('Helvetica', 12), 
                 padding=10, borderwidth=5, relief="flat", 
                 bordercolor="gray", borderround=10)
 
-#ajout de l'image en background
-canvas.create_image(0, 0, anchor=NW, image=BACKGROUND_IMAGE)
-#ajout du texte de bienvenue
-canvas.create_text(500, 50, text="Bienvenue", font="calibri 45 italic", fill="white")
+    #ajout de l'image en background
+    canvas.create_image(0, 0, anchor=NW, image=BACKGROUND_IMAGE)
+    #ajout du texte de bienvenue
+    canvas.create_text(500, 50, text="Bienvenue", font="calibri 45 italic", fill="white")
 
-button = set_button_setting(on_button_click, window, "json/style_button_play.json")
-canvas.create_window(500, 200, window=button)
+    button = set_button_setting(on_button_click, window, "json/style_button_play.json")
+    canvas.create_window(500, 200, window=button)
 
 
-window.mainloop()
+    window.mainloop()
+
+#exécution de la fonction principal
+__main__()
