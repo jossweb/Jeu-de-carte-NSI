@@ -9,8 +9,8 @@ import style
 import back
 
 #def constantes
-SIZE_WINDOW_WELCOME = [1000, 600]
-SIZE_WINDOW_GAME = [1920, 1080]
+SIZE_WINDOW_WELCOME = [800, 400]
+SIZE_WINDOW_GAME = [1000, 600]
 
 def play_button_click():
     main_game_page()
@@ -23,16 +23,16 @@ def main_welcome_page():
     BACKGROUND_IMAGE = PhotoImage(file="plateau-en-bois.ppm")
 
     #création du Canvas
-    canvas = Canvas(window, width=1000, height=600)
+    canvas = Canvas(window, width=800, height=400)
     canvas.pack()
 
     #ajout de l'image en background
     canvas.create_image(0, 0, anchor=NW, image=BACKGROUND_IMAGE)
     #ajout du texte de bienvenue
-    canvas.create_text(500, 50, text="Bienvenue", font="calibri 45 italic", fill="white")
+    canvas.create_text(400, 50, text="Bienvenue", font="calibri 45 italic", fill="white")
 
     button = style.set_button_setting(play_button_click, window, "json/style_button_play.json")
-    canvas.create_window(500, 200, window=button)
+    canvas.create_window(400, 200, window=button)
 
 
     window.mainloop()

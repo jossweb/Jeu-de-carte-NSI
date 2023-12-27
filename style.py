@@ -8,12 +8,12 @@ def set_window_setting(window, type):
     en paramètre la fenêtre"""
     if (type == "home"):
         window.title("Jeu de carte")
-        window_postion = get_window_start_position(window, 1000, 600)
-        window.geometry(f"1000x600+{window_postion[0]}+{window_postion[1]}")
+        window_postion = get_window_start_position(window, 800, 400)
+        window.geometry(f"800x400+{window_postion[0]}+{window_postion[1]}")
     elif(type == "game"):
         window.title("Jeu de carte")
-        window_postion = get_window_start_position(window, 1600, 900)
-        window.geometry(f"1600x900+{window_postion[0]}+{window_postion[1]}")
+        window_postion = get_window_start_position(window, 1000, 600)
+        window.geometry(f"1000x600+{window_postion[0]}+{window_postion[1]}")
     else:
         print("ERROR : Window type is not defined or unknown")
 
