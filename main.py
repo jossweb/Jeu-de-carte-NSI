@@ -46,14 +46,14 @@ def main_game_page():
     scene_1 = back.scene(1)
     scene_2 = back.scene(2)
 
+
     scene_1.print(window)
 
-
+    text_label = Label(window)
+    text_label.place(relx=0.5, rely=0.8, anchor="center")
     image = PhotoImage(file="cards/7C.png", name="card")
-
-    bouton_image = Button(window, image=image, command= clic_sur_bouton)
-    bouton_image.pack(pady=10)
-    bouton_image.lift()
+    bouton_image = Button(text_label, image=image, width=100, height=100,command= clic_sur_bouton)
+    bouton_image.pack()
 
     window.mainloop()
 
