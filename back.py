@@ -29,9 +29,24 @@ class scene:
             text_label = Label(window, text= self.score, font=("Helvetica", 26), foreground="#fff",background="#000")
             text_label.place(relx=0.955, rely=0.05, anchor="center")
 class card:
-     def __init__(self, name, score, path):
+    def __init__(self, name, score, path = None):
         self.name = name
         self.score = score
+        self.path = path
+
+    def print(self, window, click):
+        if self.get_path is not None:
+            text_label = Label(window)
+            text_label.place(relx=0.5, rely=0.8, anchor="center")
+            image = PhotoImage(file=self.path, name="card")
+            bouton_image = Button(text_label, image=image, width=150, height=230,command= click)
+            bouton_image.pack()
+        else: 
+             return "Error : impossible to display content if path is not defined"
+    
+    def get_path(self):
+         return f"cards/{self.name}.png"
+         
         
 class card_set:
      def __init__(self, path):
