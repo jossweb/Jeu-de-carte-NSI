@@ -13,6 +13,8 @@ import time
 SIZE_WINDOW_WELCOME = [800, 400]
 SIZE_WINDOW_GAME = [1000, 600]
 
+SET_CARDS = ["CA", "C2", "C3", "C4","C5", "C6", "C7", "C8", "C9", "C10", "CV", "CD", "CR", "HA", "H2", "H3", "H4","H5", "H6", "H7", "H8", "H9", "H10", "HV", "HD", "HR", "TA", "T2", "T3", "T4","T5", "T6", "T7", "T8", "T9", "T10", "TV", "TD", "TR", "SA", "S2", "S3", "S4","S5", "S6", "S7", "S8", "S9", "S10", "SV", "SD", "SR"]
+
 def play_button_click(window):
     window.destroy()
     main_game_page()
@@ -45,6 +47,9 @@ def main_game_page():
     #création des scènes
     scene_1 = back.scene(1)
     scene_2 = back.scene(2)
+    cards_dealt = back.cards_distribution(SET_CARDS)
+    cards_player_1 =  cards_dealt[0]
+    cards_player_2 = cards_dealt[1]
     scene_1.print(window)
     window.mainloop()
 

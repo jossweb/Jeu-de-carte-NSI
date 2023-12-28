@@ -47,11 +47,7 @@ class card:
           
     def get_path(self):
          return f"cards/{self.name}.png"
-         
-class card_set_player:
-     def __init__(self, cards):
-          self.cards = cards
-
+    
 def Deserialization_json(json_path):
     with open(json_path, "r") as fichier:
         json_data = fichier.read()
