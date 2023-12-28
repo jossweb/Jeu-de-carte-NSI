@@ -28,7 +28,11 @@ class scene:
 
             text_label = Label(window, text= self.score, font=("Helvetica", 26), foreground="#fff",background="#000")
             text_label.place(relx=0.955, rely=0.05, anchor="center")
-
+class card:
+     def __init__(self, name, score, path):
+        self.name = name
+        self.score = score
+        
 class card_set:
      def __init__(self, path):
           self.cards = [["CA", "C2", "C3", "C4","C5", "C6", "C7", "C8",
@@ -40,6 +44,7 @@ class card_set:
                          ["SA", "S2", "S3", "S4","S5", "S6", "S7", "S8",
                          "S9", "S10", "SV", "SD", "SR"],]
           self.path = "cards/"
+          self.score = [14, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
 
 def Deserialization_json(json_path):
     with open(json_path, "r") as fichier:

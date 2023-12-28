@@ -7,6 +7,7 @@ import customtkinter
 # import de module internes au projet
 import style
 import back
+import time
 
 #def constantes
 SIZE_WINDOW_WELCOME = [800, 400]
@@ -36,6 +37,9 @@ def main_welcome_page():
     canvas.create_window(400, 200, window=button)
     window.mainloop()
 
+def clic_sur_bouton():
+    print("touch !")
+
 def main_game_page():
     window = back.create_window("game")
     #création des scènes
@@ -43,6 +47,13 @@ def main_game_page():
     scene_2 = back.scene(2)
 
     scene_1.print(window)
+
+
+    image = PhotoImage(file="cards/7C.png", name="card")
+
+    bouton_image = Button(window, image=image, command= clic_sur_bouton)
+    bouton_image.pack(pady=10)
+    bouton_image.lift()
 
     window.mainloop()
 
