@@ -1,7 +1,6 @@
 #import de modules externes
 from tkinter import *
 from tkinter import ttk
-from tkvideo import tkvideo
 
 import customtkinter
 
@@ -39,13 +38,11 @@ def main_welcome_page():
 
 def main_game_page():
     window = back.create_window("game")
+    #création des scènes
+    scene_1 = back.scene(1)
+    scene_2 = back.scene(2)
 
-    video = Label(window)
-    video.pack()
-
-    player = tkvideo("videos/Séquence 01.mp4", video)
-
-    player.play()
+    scene_1.print(window)
 
     window.mainloop()
 
