@@ -1,6 +1,7 @@
 #import de modules externes
 from tkinter import *
 from tkinter import ttk
+from tkvideo import tkvideo
 
 import customtkinter
 
@@ -34,20 +35,20 @@ def main_welcome_page():
 
     button = style.set_button_setting(lambda: play_button_click(window), window, "json/style_button_play.json")
     canvas.create_window(400, 200, window=button)
-#
     window.mainloop()
 
 def main_game_page():
     window = back.create_window("game")
 
-    BACKGROUND_IMAGE = PhotoImage(file="images/point de vue 1.png")
+    video = Label(window)
+    video.pack()
 
-    #création du Canvas
-    canvas = Canvas(window, width=1600, height=900)
-    canvas.pack()
+    player = tkvideo("videos/Séquence 01.mp4", video)
 
-    #ajout de l'image en background
-    canvas.create_image(0, 0, anchor=NW, image=BACKGROUND_IMAGE)
+    player.play()
+
+    window.mainloop()
+
 
 #exécution de la fonction principal au démarage
 main_welcome_page()
