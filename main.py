@@ -45,16 +45,7 @@ def main_game_page():
     #création des scènes
     scene_1 = back.scene(1)
     scene_2 = back.scene(2)
-
-
     scene_1.print(window)
-
-    text_label = Label(window)
-    text_label.place(relx=0.5, rely=0.8, anchor="center")
-    image = PhotoImage(file="cards/7C.png", name="card")
-    bouton_image = Button(text_label, image=image, width=150, height=230,command= clic_sur_bouton)
-    bouton_image.pack()
-
     window.mainloop()
 
 
