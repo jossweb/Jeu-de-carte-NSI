@@ -30,19 +30,21 @@ class scene:
             text_label = Label(window, text= self.score, font=("Helvetica", 26), foreground="#fff",background="#000")
             text_label.place(relx=0.955, rely=0.05, anchor="center")
 class card:
-    def __init__(self, name, score, path = None):
+    def __init__(self, name, score, path = None, image = None):
         self.name = name
         self.score = score
         self.path = path
+        self.image = image
+        self.photo_image = None
 
     def print(self, window, click, relx, rely):
-        if self.get_path is not None:
+        if self.path is not None:
             text_label = Label(window)
             text_label.place(relx=relx, rely=rely, anchor="center")
-            image = PhotoImage(file=self.path, name="card")
-            bouton_image = Button(text_label, image=image, width=100, height=144, command=click)
-            # empêche le garbage collection (le programme libere de la ram automatiquement et l'image s'affiche blanche)
-            bouton_image.image = image  
+
+            # Utiliser une nouvelle instance de PhotoImage pour chaque objet card
+            self.photo_image = PhotoImage(file=self.path)
+            bouton_image = Button(text_label, image=self.photo_image, width=100, height=144, command=click)
             bouton_image.pack()
         else: 
              return "Error : impossible to display content if path is not defined"
@@ -84,5 +86,9 @@ def cards_distribution(card_set):
 def click_on_card():
     pass
 
-def print_all_cards(cards_set):
+def print_all_cards(cards_set, window):
     num_cards = len(cards_set)
+    for i in range(num_cards):
+        tempo_card = card(cards_set[i][0], cards_set[i][1])
+        tempo_card.path = tempo_card.get_path()
+        tempo_card.print(window, lambda: click_on_card(), 0.05 + (0.05 * i), 0.5)
