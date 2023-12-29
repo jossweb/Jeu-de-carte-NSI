@@ -64,6 +64,11 @@ def main_game_page():
     cards_player_1 =  cards_dealt[0]
     cards_player_2 = cards_dealt[1]
     scene_1.print(window)
+
+    test = back.card("TQ", 10)
+    test.path = test.get_path()
+    #test.print(window, lambda : clic_sur_bouton())
+    test.print(window, lambda: clic_sur_bouton())
     window.mainloop()
 
 

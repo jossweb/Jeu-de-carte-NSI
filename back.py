@@ -40,13 +40,15 @@ class card:
             text_label = Label(window)
             text_label.place(relx=0.5, rely=0.8, anchor="center")
             image = PhotoImage(file=self.path, name="card")
-            bouton_image = Button(text_label, image=image, width=150, height=230,command= click)
+            bouton_image = Button(text_label, image=image, width=100, height=100, command=click)
+            # empêche le garbage collection (le programme libere de la ram automatiquement et l'image s'affiche blanche)
+            bouton_image.image = image  
             bouton_image.pack()
         else: 
              return "Error : impossible to display content if path is not defined"
           
     def get_path(self):
-         return f"cards/{self.name}.png"
+         return f"images/cards/{self.name}.png"
     
 def Deserialization_json(json_path):
     with open(json_path, "r") as fichier:
