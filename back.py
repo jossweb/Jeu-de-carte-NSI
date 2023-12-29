@@ -35,12 +35,12 @@ class card:
         self.score = score
         self.path = path
 
-    def print(self, window, click):
+    def print(self, window, click, relx, rely):
         if self.get_path is not None:
             text_label = Label(window)
-            text_label.place(relx=0.5, rely=0.8, anchor="center")
+            text_label.place(relx=relx, rely=rely, anchor="center")
             image = PhotoImage(file=self.path, name="card")
-            bouton_image = Button(text_label, image=image, width=100, height=100, command=click)
+            bouton_image = Button(text_label, image=image, width=100, height=144, command=click)
             # empêche le garbage collection (le programme libere de la ram automatiquement et l'image s'affiche blanche)
             bouton_image.image = image  
             bouton_image.pack()
@@ -80,3 +80,9 @@ def cards_distribution(card_set):
         else:
             set_player_2.append(card_set[i])
     return(set_player_1, set_player_2)
+
+def click_on_card():
+    pass
+
+def print_all_cards(cards_set):
+    num_cards = len(cards_set)

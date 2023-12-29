@@ -52,9 +52,6 @@ def main_welcome_page():
     canvas.create_window(400, 200, window=button)
     window.mainloop()
 
-def clic_sur_bouton():
-    print("touch !")
-
 def main_game_page():
     window = back.create_window("game")
     #création des scènes
@@ -65,10 +62,10 @@ def main_game_page():
     cards_player_2 = cards_dealt[1]
     scene_1.print(window)
 
-    test = back.card("TQ", 10)
+    test = back.card("C7", 10)
     test.path = test.get_path()
-    #test.print(window, lambda : clic_sur_bouton())
-    test.print(window, lambda: clic_sur_bouton())
+    test.print(window, lambda: clic_sur_bouton(), 0.5, 0.5)
+    test.print(window, lambda: clic_sur_bouton(), 0.5, 0.8)
     window.mainloop()
 
 
