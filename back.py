@@ -85,6 +85,7 @@ def click_on_card(id_card):
     print(f"carte cliqué : {id_card}")
 
 def print_all_cards(cards_set, window):
+    num_cards = len(cards_set)
     # Liste pour stocker les instances de PhotoImage et eviter le garbage
     photo_images = []  
     for card_data in cards_set:
@@ -92,8 +93,41 @@ def print_all_cards(cards_set, window):
         card_instance.path = card_instance.get_path()
         photo_image = PhotoImage(file=card_instance.path)
         photo_images.append(photo_image)
-
-    for i, card_data in enumerate(cards_set):
-        card_instance = card(card_data[0], card_data[1])
-        card_instance.path = card_instance.get_path()
-        card_instance.print(window, 0.05 + (0.05 * i), 0.5, photo_images[i])
+    
+    if num_cards >= 20:
+        cards_on_last_line = num_cards%10
+        line = ((10 - cards_on_last_line + 1) / 2) / 10
+        row = 0.70
+        cards_on_last_line = num_cards%10
+        for i, card_data in enumerate(cards_set):
+            if i == cards_on_last_line: 
+                line = 0.05
+                row = 0.80
+            elif i == cards_on_last_line + 10:
+                row = 0.90
+                line = 0.05
+            card_instance = card(card_data[0], card_data[1])
+            card_instance.path = card_instance.get_path()
+            card_instance.print(window, line, row, photo_images[i])
+            line += 0.1
+    elif num_cards > 10:
+        cards_on_last_line = num_cards%10
+        line = ((10 - cards_on_last_line + 1) / 2) / 10
+        row = 0.80
+        for i, card_data in enumerate(cards_set):
+            if i == cards_on_last_line: 
+                line = 0.05
+                row = 0.90
+            card_instance = card(card_data[0], card_data[1])
+            card_instance.path = card_instance.get_path()
+            card_instance.print(window, line, row, photo_images[i])
+            line += 0.1
+    else :
+        cards_on_last_line = num_cards%10
+        line = ((10 - cards_on_last_line + 1) / 2) / 10
+        row = 0.90
+        for i, card_data in enumerate(cards_set):
+            card_instance = card(card_data[0], card_data[1])
+            card_instance.path = card_instance.get_path()
+            card_instance.print(window, line, row, photo_images[i])
+            line += 0.1
