@@ -36,12 +36,12 @@ class card:
         self.path = path
         self.image = image
 
-    def print(self, window, click, relx, rely, photo_image):
+    def print(self, window, relx, rely, photo_image):
         if self.path is not None:
             text_label = Label(window)
             text_label.place(relx=relx, rely=rely, anchor="center")
 
-            bouton_image = Button(text_label, image=photo_image, width=100, height=144, command=click)
+            bouton_image = Button(text_label, image=photo_image, width=100, height=144, command= lambda: click_on_card(self.name))
             bouton_image.photo = photo_image  # Gardez une référence à l'image pour éviter la suppression par le garbage collector
             bouton_image.pack()
         else:
@@ -81,11 +81,11 @@ def cards_distribution(card_set):
             set_player_2.append(card_set[i])
     return(set_player_1, set_player_2)
 
-def click_on_card():
-    pass
+def click_on_card(id_card):
+    print(f"carte cliqué : {id_card}")
 
 def print_all_cards(cards_set, window):
-    # Liste pour stocker les instances de PhotoImage
+    # Liste pour stocker les instances de PhotoImage et eviter le garbage
     photo_images = []  
     for card_data in cards_set:
         card_instance = card(card_data[0], card_data[1])
@@ -96,4 +96,4 @@ def print_all_cards(cards_set, window):
     for i, card_data in enumerate(cards_set):
         card_instance = card(card_data[0], card_data[1])
         card_instance.path = card_instance.get_path()
-        card_instance.print(window, lambda: click_on_card(), 0.05 + (0.05 * i), 0.5, photo_images[i])
+        card_instance.print(window, 0.05 + (0.05 * i), 0.5, photo_images[i])
