@@ -62,14 +62,8 @@ def main_game_page():
     cards_player_2 = cards_dealt[1]
     scene_1.print(window)
 
-    tempo_card = back.card(cards_player_1[0][0], cards_player_1[0][1])
-    tempo_card.path = tempo_card.get_path()
-    tempo_card.print(window, lambda: click_on_card(), 0.05, 0.5)
-
-    tempo_card2 = back.card(cards_player_2[0][0], cards_player_2[0][1])
-    tempo_card2.path = tempo_card2.get_path()
-    tempo_card2.print(window, lambda: click_on_card(), 0.5, 0.5)
-    #back.print_all_cards(cards_player_1, window)
+    back.print_all_cards(cards_player_1, window)
+    
     window.mainloop()
 
 

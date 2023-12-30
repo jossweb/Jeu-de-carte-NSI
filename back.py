@@ -30,25 +30,23 @@ class scene:
             text_label = Label(window, text= self.score, font=("Helvetica", 26), foreground="#fff",background="#000")
             text_label.place(relx=0.955, rely=0.05, anchor="center")
 class card:
-    def __init__(self, name, score, path = None, image = None):
+    def __init__(self, name, score, path=None, image=None):
         self.name = name
         self.score = score
         self.path = path
         self.image = image
-        self.photo_image = None
 
-    def print(self, window, click, relx, rely):
+    def print(self, window, click, relx, rely, photo_image):
         if self.path is not None:
             text_label = Label(window)
             text_label.place(relx=relx, rely=rely, anchor="center")
 
-            # Utiliser une nouvelle instance de PhotoImage pour chaque objet card
-            self.photo_image = PhotoImage(file=self.path)
-            bouton_image = Button(text_label, image=self.photo_image, width=100, height=144, command=click)
+            bouton_image = Button(text_label, image=photo_image, width=100, height=144, command=click)
+            bouton_image.photo = photo_image  # Gardez une référence à l'image pour éviter la suppression par le garbage collector
             bouton_image.pack()
-        else: 
-             return "Error : impossible to display content if path is not defined"
-          
+        else:
+            return "Error: impossible to display content if path is not defined"
+
     def get_path(self):
          return f"images/cards/{self.name}.png"
     
@@ -87,8 +85,15 @@ def click_on_card():
     pass
 
 def print_all_cards(cards_set, window):
-    num_cards = len(cards_set)
-    for i in range(num_cards):
-        tempo_card = card(cards_set[i][0], cards_set[i][1])
-        tempo_card.path = tempo_card.get_path()
-        tempo_card.print(window, lambda: click_on_card(), 0.05 + (0.05 * i), 0.5)
+    # Liste pour stocker les instances de PhotoImage
+    photo_images = []  
+    for card_data in cards_set:
+        card_instance = card(card_data[0], card_data[1])
+        card_instance.path = card_instance.get_path()
+        photo_image = PhotoImage(file=card_instance.path)
+        photo_images.append(photo_image)
+
+    for i, card_data in enumerate(cards_set):
+        card_instance = card(card_data[0], card_data[1])
+        card_instance.path = card_instance.get_path()
+        card_instance.print(window, lambda: click_on_card(), 0.05 + (0.05 * i), 0.5, photo_images[i])
