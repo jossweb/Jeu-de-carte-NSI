@@ -19,6 +19,9 @@ SIZE_WINDOW_GAME = [1000, 600]
 card_on_table_player_1 = None
 card_on_table_player_2 = None
 
+card_set_player_1 = None
+card_set_player_2 = None
+
 #carreau = T
 #coeur = H
 #piques = S
@@ -36,6 +39,7 @@ SET_CARDS = [("CA", 14), ("C2", 2), ("C3", 3), ("C4", 4),
 
 def play_button_click(window):
     window.destroy()
+
     main_game_page()
 
 def main_welcome_page():
@@ -61,20 +65,31 @@ def main_welcome_page():
 
 
 def main_game_page():
-    if card_on_table_player_1 == None:
-        window = create_window("game")
-        #création des scènes
-        scene_1 = scene(1)
+    global card_set_player_1, card_set_player_2
+
+    if card_set_player_1 is None and card_set_player_2 is None:
         cards_dealt = cards_distribution(SET_CARDS)
-        cards_player_1 =  cards_dealt[0]
-        cards_player_2 = cards_dealt[1]
-        scene_1.print(window)
-        #appelle de la fonction qui place les boutons contenant les cartes à l'écran
-        print_all_cards(cards_player_1, window)
-        print(f"carte récupéré : {card_on_table_player_1}")
-    else: 
+        card_set_player_1 = cards_dealt[0]
+        card_set_player_2 = cards_dealt[1]
+
+    if card_on_table_player_1 is None:
         window = create_window("game")
+        # création des scènes
+        scene_1 = scene(1)
+
+        scene_1.print(window)
+        # appelle de la fonction qui place les boutons contenant les cartes à l'écran
+        print_all_cards(card_set_player_1, window)
+        print(f"carte récupérée : {card_on_table_player_1}")
+    else:
+        window = create_window("game")
+        scene_1 = scene(2)
+        scene_1.print(window)
+        # appelle de la fonction qui place les boutons contenant les cartes à l'écran
+        print_all_cards(card_set_player_1, window)
+        print(f"carte récupérée : {card_on_table_player_1}")
     window.mainloop()
+
 
 class scene:
     def __init__(self, player_number, score = 0, player_name = "joueur"):
@@ -87,7 +102,6 @@ class scene:
                  video_path = "videos/Séquence 01.mp4"
             else:
                  video_path = "videos/Séquence 02.mp4"
-
             video = Label(window)
             video.pack()
             player = tkvideo(video_path, video)
@@ -150,6 +164,7 @@ def cards_distribution(card_set):
     return(set_player_1, set_player_2)
 
 def click_on_card(id_card):
+    global card_on_table_player_1 
     card_on_table_player_1 = id_card
     main_game_page()
         
