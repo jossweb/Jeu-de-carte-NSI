@@ -78,20 +78,43 @@ def main_game_page():
         card_set_player_1 = cards_dealt[0]
         card_set_player_2 = cards_dealt[1]
 
-    if card_on_table_player_1 is None:
-        window = create_window("game")
-        # création des scènes
-        scene_1 = scene(1, score_player_1)
+    if len(card_set_player_2) > 0:
+        if card_on_table_player_1 is None:
+            window = create_window("game")
+            # création des scènes
+            scene_1 = scene(1, score_player_1)
 
-        scene_1.print(window)
-        # appelle de la fonction qui place les boutons contenant les cartes à l'écran
-        print_all_cards(card_set_player_1, window)
+            scene_1.print(window)
+            # appelle de la fonction qui place les boutons contenant les cartes à l'écran
+            print_all_cards(card_set_player_1, window)
+        else:
+            window = create_window("game")
+            scene_2 = scene(2, score_player_2)
+            scene_2.print(window)
+            # appelle de la fonction qui place les boutons contenant les cartes à l'écran
+            print_all_cards(card_set_player_2, window)
+        window.mainloop()
+    
     else:
-        window = create_window("game")
-        scene_2 = scene(2, score_player_2)
-        scene_2.print(window)
-        # appelle de la fonction qui place les boutons contenant les cartes à l'écran
-        print_all_cards(card_set_player_2, window)
+        result_page((score_player_1, score_player_2))
+        
+        
+
+def result_page(score):
+    window = create_window("home")
+    BACKGROUND_IMAGE = PhotoImage(file="plateau-en-bois.ppm")
+    #création du Canvas
+    canvas = Canvas(window, width=800, height=400)
+    canvas.pack()
+
+    #ajout de l'image en background
+    canvas.create_image(0, 0, anchor=NW, image=BACKGROUND_IMAGE)
+    #ajout du texte de bienvenue
+    canvas.create_text(400, 50, text="Résultats", font="calibri 45 italic", fill="white")
+
+    button = style.set_button_setting(lambda: play_button_click(window), window, "json/style_button_play.json")
+    canvas.create_window(400, 200, window=button)
+
     window.mainloop()
 
 
