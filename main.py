@@ -111,9 +111,18 @@ def result_page(score):
     canvas.create_image(0, 0, anchor=NW, image=BACKGROUND_IMAGE)
     #ajout du texte de bienvenue
     canvas.create_text(400, 50, text="Résultats", font="calibri 45 italic", fill="white")
+    canvas.create_text(200, 90, text="Joueur 1", font="calibri 25 italic", fill="white")
+    canvas.create_text(600, 90, text="Joueur 2", font="calibri 25 italic", fill="white")
+    canvas.create_text(200, 135, text=score[0], font="calibri 25 italic", fill="white")
+    canvas.create_text(600, 135, text=score[1], font="calibri 25 italic", fill="white")
+    if score[0] - score[1] < 0:
+        end_sentence = "Le joueur 2 l'emporte !"
+    else:
+        end_sentence = "Le joueur 1 l'emporte !"
 
+    canvas.create_text(400, 200, text=end_sentence, font="calibri 25 italic", fill="white")
     button = style.set_button_setting(lambda: play_button_click(window), window, "json/style_button_play.json")
-    canvas.create_window(400, 200, window=button)
+    canvas.create_window(400, 350, window=button)
 
     window.mainloop()
 
