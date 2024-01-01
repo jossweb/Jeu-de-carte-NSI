@@ -32,11 +32,14 @@ class tkvideo():
             or once.
         """
         frame_data = imageio.get_reader(path)
-        while True:
-            for image in frame_data.iter_data():
-                frame_image = ImageTk.PhotoImage(Image.fromarray(image).resize(self.size))
-                label.config(image=frame_image)
-                label.image = frame_image
+        try:
+            while True:
+                for image in frame_data.iter_data():
+                    frame_image = ImageTk.PhotoImage(Image.fromarray(image).resize(self.size))
+                    label.config(image=frame_image)
+                    label.image = frame_image
+        except:
+            print("L'application c'est arrêtée")
 
     def play(self):
         """

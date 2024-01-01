@@ -132,6 +132,14 @@ class card:
             bouton_image.pack()
         else:
             return "Error: impossible to display content if path is not defined"
+        
+    def remove_card(self, cards_set):
+        card_list_without_remove_card = []
+        for card in cards_set:
+            if card[0] != self.name:
+                card_list_without_remove_card.append(card)
+        return card_list_without_remove_card
+
 
     def get_path(self):
          return f"images/cards/{self.name}.png"
@@ -172,13 +180,16 @@ def click_on_card(id_card, score_card, window):
     window.destroy()
     if card_on_table_player_1 is None:
         card_on_table_player_1 = (id_card, score_card) 
+        temp_card = card(id_card, score_card).remove_card(card_set_player_1)
+        card_set_player_1 = temp_card
     else :
         if score_card < card_on_table_player_1[1]:
             score_player_1 += 2
         else:
             score_player_2 += 2
         card_on_table_player_1 = None
-        card_set_player_2 = None
+        temp_card = card(id_card, score_card).remove_card(card_set_player_2)
+        card_set_player_2 = temp_card
     main_game_page()
         
 
