@@ -110,8 +110,6 @@ class scene:
             video.pack()
             player = tkvideo(video_path, video)
             player.play()
-            text_label = Label(window, text= self.player_name, font=("Helvetica", 22), background="#FEB778")
-            text_label.place(relx=0.5, rely=0.05, anchor="center")
 
             text_label = Label(window, text= self.score, font=("Helvetica", 26), foreground="#fff",background="#000")
             text_label.place(relx=0.955, rely=0.05, anchor="center")
