@@ -123,7 +123,7 @@ class card:
             text_label = Label(window)
             text_label.place(relx=relx, rely=rely, anchor="center")
 
-            bouton_image = Button(text_label, image=photo_image, width=100, height=144, command= lambda: click_on_card(self.name))
+            bouton_image = Button(text_label, image=photo_image, width=100, height=144, command= lambda: click_on_card(self.name, window))
             bouton_image.photo = photo_image  # Gardez une référence à l'image pour éviter la suppression par le garbage collector
             bouton_image.pack()
         else:
@@ -163,8 +163,9 @@ def cards_distribution(card_set):
             set_player_2.append(card_set[i])
     return(set_player_1, set_player_2)
 
-def click_on_card(id_card):
+def click_on_card(id_card, window):
     global card_on_table_player_1 
+    window.destroy()
     card_on_table_player_1 = id_card
     main_game_page()
         
