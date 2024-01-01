@@ -140,6 +140,9 @@ class card:
                 card_list_without_remove_card.append(card)
         return card_list_without_remove_card
 
+    def get_path(self):
+         return f"images/cards/{self.name}.png"
+
 
     def get_path(self):
          return f"images/cards/{self.name}.png"
@@ -176,20 +179,18 @@ def cards_distribution(card_set):
     return(set_player_1, set_player_2)
 
 def click_on_card(id_card, score_card, window):
-    global card_on_table_player_1, card_set_player_2, score_player_1, score_player_2
+    global card_on_table_player_1, card_set_player_2, card_set_player_1, score_player_1, score_player_2
     window.destroy()
     if card_on_table_player_1 is None:
         card_on_table_player_1 = (id_card, score_card) 
-        temp_card = card(id_card, score_card).remove_card(card_set_player_1)
-        card_set_player_1 = temp_card
+        card_set_player_1 = card(id_card, score_card).remove_card(card_set_player_1)
     else :
         if score_card < card_on_table_player_1[1]:
             score_player_1 += 2
         else:
             score_player_2 += 2
         card_on_table_player_1 = None
-        temp_card = card(id_card, score_card).remove_card(card_set_player_2)
-        card_set_player_2 = temp_card
+        card_set_player_2 = card(id_card, score_card).remove_card(card_set_player_2)        
     main_game_page()
         
 
