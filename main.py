@@ -16,11 +16,17 @@ from tkvideo import *
 SIZE_WINDOW_WELCOME = [800, 400]
 SIZE_WINDOW_GAME = [1000, 600]
 
+#variable temporaire qui stock le choix du joueur 1 le temps que le joueur numéro
+#prenne sa décision
 card_on_table_player_1 = None
-card_on_table_player_2 = None
+
 
 card_set_player_1 = None
 card_set_player_2 = None
+
+#variable accumulateur qui contienne le score de chaque joueurs
+score_player_1 = 0
+score_player_2 = 0
 
 #carreau = T
 #coeur = H
@@ -39,7 +45,6 @@ SET_CARDS = [("CA", 14), ("C2", 2), ("C3", 3), ("C4", 4),
 
 def play_button_click(window):
     window.destroy()
-
     main_game_page()
 
 def main_welcome_page():
@@ -66,6 +71,7 @@ def main_welcome_page():
 
 def main_game_page():
     global card_set_player_1, card_set_player_2
+    global score_player_1, score_player_2
 
     if card_set_player_1 is None and card_set_player_2 is None:
         cards_dealt = cards_distribution(SET_CARDS)
@@ -75,24 +81,22 @@ def main_game_page():
     if card_on_table_player_1 is None:
         window = create_window("game")
         # création des scènes
-        scene_1 = scene(1)
+        scene_1 = scene(1, score_player_1)
 
         scene_1.print(window)
         # appelle de la fonction qui place les boutons contenant les cartes à l'écran
         print_all_cards(card_set_player_1, window)
-        print(f"carte récupérée : {card_on_table_player_1}")
     else:
         window = create_window("game")
-        scene_1 = scene(2)
-        scene_1.print(window)
+        scene_2 = scene(2, score_player_2)
+        scene_2.print(window)
         # appelle de la fonction qui place les boutons contenant les cartes à l'écran
-        print_all_cards(card_set_player_1, window)
-        print(f"carte récupérée : {card_on_table_player_1}")
+        print_all_cards(card_set_player_2, window)
     window.mainloop()
 
 
 class scene:
-    def __init__(self, player_number, score = 0, player_name = "joueur"):
+    def __init__(self, player_number, score, player_name = "joueur"):
         self.player_name = player_name
         self.player_number = player_number
         self.score = score
@@ -123,7 +127,7 @@ class card:
             text_label = Label(window)
             text_label.place(relx=relx, rely=rely, anchor="center")
 
-            bouton_image = Button(text_label, image=photo_image, width=100, height=144, command= lambda: click_on_card(self.name, window))
+            bouton_image = Button(text_label, image=photo_image, width=100, height=144, command= lambda: click_on_card(self.name, self.score, window))
             bouton_image.photo = photo_image  # Gardez une référence à l'image pour éviter la suppression par le garbage collector
             bouton_image.pack()
         else:
@@ -163,10 +167,18 @@ def cards_distribution(card_set):
             set_player_2.append(card_set[i])
     return(set_player_1, set_player_2)
 
-def click_on_card(id_card, window):
-    global card_on_table_player_1 
+def click_on_card(id_card, score_card, window):
+    global card_on_table_player_1, card_set_player_2, score_player_1, score_player_2
     window.destroy()
-    card_on_table_player_1 = id_card
+    if card_on_table_player_1 is None:
+        card_on_table_player_1 = (id_card, score_card) 
+    else :
+        if score_card < card_on_table_player_1[1]:
+            score_player_1 += 2
+        else:
+            score_player_2 += 2
+        card_on_table_player_1 = None
+        card_set_player_2 = None
     main_game_page()
         
 
