@@ -91,11 +91,16 @@ def main_game_page():
                                    ,temp_card_set_player_2[0][1] + temp_card_set_player_2[1][1] + temp_card_set_player_2[2][1])
                 if temp_card_set_player_1[3][1] > temp_card_set_player_2[3][1]:
                     score_player_1 += card_of_battle[1]
-                    print(f"Player 1 win the battle and add {card_of_battle[1]} to his score board")
+                    print(f"Player 1 win the battle and add {card_of_battle[0]} to his score board")
                 elif temp_card_set_player_1[3][1] < temp_card_set_player_2[3][1]:
-                    score_player_1 += card_of_battle[2]
-                    print(f"Player 2 win the battle and add {card_of_battle[2]} to his score board")
+                    score_player_2 += card_of_battle[1]
+                    print(f"Player 2 win the battle and add {card_of_battle[1]} to his score board")
                 first_lap = False
+                for i in range(4):
+                    card_1 = card(temp_card_set_player_1[i][0], temp_card_set_player_1[i][1])
+                    card_set_player_1 = card_1.remove_card(card_set_player_1)
+                    card_2 = card(temp_card_set_player_2[i][0], temp_card_set_player_2[i][1])
+                    card_set_player_2 = card_2.remove_card(card_set_player_2)
 
             scene_1 = scene(1, score_player_1)
             scene_1.print(window)
