@@ -2,7 +2,7 @@
 from tkinter import *
 from tkinter import ttk
 from json import loads
-from random import randint
+from random import randint, shuffle
 
 import customtkinter
 
@@ -73,6 +73,7 @@ def main_welcome_page():
 def main_game_page():
     global card_set_player_1, card_set_player_2
     global score_player_1, score_player_2
+    global first_lap
     if card_set_player_1 is None and card_set_player_2 is None:
         cards_dealt = cards_distribution(SET_CARDS)
         card_set_player_1 = cards_dealt[0]
@@ -81,6 +82,21 @@ def main_game_page():
         if card_on_table_player_1 is None:
             window = create_window("game")
             # création des scènes
+            if first_lap:
+                temp_card_set_player_1 = card_set_player_1
+                temp_card_set_player_2 = card_set_player_2
+                shuffle(temp_card_set_player_1) 
+                shuffle(temp_card_set_player_1)
+                card_of_battle = (temp_card_set_player_1[0][1] + temp_card_set_player_1[1][1] + temp_card_set_player_1[2][1]
+                                   ,temp_card_set_player_2[0][1] + temp_card_set_player_2[1][1] + temp_card_set_player_2[2][1])
+                if temp_card_set_player_1[3][1] > temp_card_set_player_2[3][1]:
+                    score_player_1 += card_of_battle[1]
+                    print(f"Player 1 win the battle and add {card_of_battle[1]} to his score board")
+                elif temp_card_set_player_1[3][1] < temp_card_set_player_2[3][1]:
+                    score_player_1 += card_of_battle[2]
+                    print(f"Player 2 win the battle and add {card_of_battle[2]} to his score board")
+                first_lap = False
+
             scene_1 = scene(1, score_player_1)
             scene_1.print(window)
             # appelle de la fonction qui place les boutons contenant les cartes à l'écran
