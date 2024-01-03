@@ -92,9 +92,12 @@ def main_game_page():
                 if temp_card_set_player_1[3][1] > temp_card_set_player_2[3][1]:
                     score_player_1 += card_of_battle[1]
                     print(f"Player 1 win the battle and add {card_of_battle[0]} to his score board")
+                    message = f"Le joueur 1 remporte la bataille et {card_of_battle[1]} points"
                 elif temp_card_set_player_1[3][1] < temp_card_set_player_2[3][1]:
                     score_player_2 += card_of_battle[1]
                     print(f"Player 2 win the battle and add {card_of_battle[1]} to his score board")
+                    message = f"Le joueur 2 remporte la bataille et {card_of_battle[1]} points"
+
                 first_lap = False
                 for i in range(4):
                     card_1 = card(temp_card_set_player_1[i][0], temp_card_set_player_1[i][1])
@@ -102,7 +105,7 @@ def main_game_page():
                     card_2 = card(temp_card_set_player_2[i][0], temp_card_set_player_2[i][1])
                     card_set_player_2 = card_2.remove_card(card_set_player_2)
 
-            scene_1 = scene(1, score_player_1)
+            scene_1 = scene(1, score_player_1, message = message)
             scene_1.print(window)
             # appelle de la fonction qui place les boutons contenant les cartes à l'écran
             print_all_cards(card_set_player_1, window)
@@ -141,10 +144,11 @@ def result_page(score):
     window.mainloop()
 
 class scene:
-    def __init__(self, player_number, score, player_name = "joueur"):
+    def __init__(self, player_number, score, player_name = "joueur", message = None):
         self.player_name = player_name
         self.player_number = player_number
         self.score = score
+        self.message = message
     
     def print(self, window):
             if self.player_number == 1:
@@ -155,9 +159,11 @@ class scene:
             video.pack()
             player = tkvideo(video_path, video)
             player.play()
-
-            text_label = Label(window, text= self.score, font=("Helvetica", 26), foreground="#fff",background="#000")
-            text_label.place(relx=0.955, rely=0.05, anchor="center")
+            if self.message is not None:
+                message_label = Label(window, text = self.message, font=("Helvetica", 20), foreground="#fff",background="#000")
+                message_label.place(relx=0.5, rely=0.2, anchor="center")
+            score_label = Label(window, text= self.score, font=("Helvetica", 26), foreground="#fff",background="#000")
+            score_label.place(relx=0.955, rely=0.05, anchor="center")
 class card:
     def __init__(self, name, score, path=None, image=None):
         self.name = name
