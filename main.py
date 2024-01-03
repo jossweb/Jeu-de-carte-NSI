@@ -28,6 +28,10 @@ card_set_player_2 = None
 score_player_1 = 0
 score_player_2 = 0
 
+#variable initialisé a True qui indique que l'on est au premier
+#tour de la partie
+first_lap = True
+
 
 
 #carreau = T
@@ -54,38 +58,30 @@ def main_welcome_page():
     l'utilisateur. Cette fonction est exécuté au démarage du programme"""
     window = create_window("home")
     BACKGROUND_IMAGE = PhotoImage(file="back.ppm")
-
     #création du Canvas
     canvas = Canvas(window, width=800, height=400)
     canvas.pack()
-
     #ajout de l'image en background
     canvas.create_image(0, 0, anchor=NW, image=BACKGROUND_IMAGE)
     #ajout du texte de bienvenue
     canvas.create_text(400, 30, text="Bienvenue", font="calibri 45 italic", fill="black")
     canvas.create_text(400, 140, text="Découvrez le jeu de la bataille ouverte", font="calibri 17 italic", fill="black")
-
     button = style.set_button_setting(lambda: play_button_click(window), window, "json/style_button_play.json")
     canvas.create_window(400, 300, window=button)
     window.mainloop()
 
-
-
 def main_game_page():
     global card_set_player_1, card_set_player_2
     global score_player_1, score_player_2
-
     if card_set_player_1 is None and card_set_player_2 is None:
         cards_dealt = cards_distribution(SET_CARDS)
         card_set_player_1 = cards_dealt[0]
         card_set_player_2 = cards_dealt[1]
-
     if len(card_set_player_2) > 0:
         if card_on_table_player_1 is None:
             window = create_window("game")
             # création des scènes
             scene_1 = scene(1, score_player_1)
-
             scene_1.print(window)
             # appelle de la fonction qui place les boutons contenant les cartes à l'écran
             print_all_cards(card_set_player_1, window)
@@ -96,11 +92,8 @@ def main_game_page():
             # appelle de la fonction qui place les boutons contenant les cartes à l'écran
             print_all_cards(card_set_player_2, window)
         window.mainloop()
-    
     else:
         result_page((score_player_1, score_player_2))
-        
-        
 
 def result_page(score):
     window = create_window("home")
@@ -108,11 +101,11 @@ def result_page(score):
     #création du Canvas
     canvas = Canvas(window, width=800, height=400)
     canvas.pack()
-
     #ajout de l'image en background
     canvas.create_image(0, 0, anchor=NW, image=BACKGROUND_IMAGE)
-    #ajout du texte de bienvenue
+    #ajout du titre de la page résultat
     canvas.create_text(400, 50, text="Résultats", font="calibri 45 italic", fill="black")
+    #mise en place 
     canvas.create_text(200, 90, text="Joueur 1", font="calibri 25 italic", fill="black")
     canvas.create_text(600, 90, text="Joueur 2", font="calibri 25 italic", fill="black")
     canvas.create_text(200, 135, text=score[0], font="calibri 25 italic", fill="black")
@@ -121,13 +114,10 @@ def result_page(score):
         end_sentence = "Le joueur 2 l'emporte !"
     else:
         end_sentence = "Le joueur 1 l'emporte !"
-
     canvas.create_text(400, 200, text=end_sentence, font="calibri 25 italic", fill="black")
     button = style.set_button_setting(lambda: play_button_click(window), window, "json/style_button_play.json")
     canvas.create_window(400, 350, window=button)
-
     window.mainloop()
-
 
 class scene:
     def __init__(self, player_number, score, player_name = "joueur"):
@@ -218,9 +208,9 @@ def click_on_card(id_card, score_card, window):
         card_set_player_1 = card(id_card, score_card).remove_card(card_set_player_1)
     else :
         if score_card < card_on_table_player_1[1]:
-            score_player_1 += 2
+            score_player_1 += score_card
         else:
-            score_player_2 += 2
+            score_player_2 += card_on_table_player_1[1]
         card_on_table_player_1 = None
         card_set_player_2 = card(id_card, score_card).remove_card(card_set_player_2)        
     main_game_page()
