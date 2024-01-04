@@ -14,6 +14,10 @@ def set_window_setting(window, type):
         window.title("Jeu de carte")
         window_postion = get_window_start_position(window, 1000, 600)
         window.geometry(f"1000x600+{window_postion[0]}+{window_postion[1]}")
+    elif(type == "credits"):
+        window.title("Jeu de carte")
+        window_postion = get_window_start_position(window, 450, 600)
+        window.geometry(f"450x600+{window_postion[0]}+{window_postion[1]}")
     else:
         print("ERROR : Window type is not defined or unknown")
 
@@ -34,11 +38,10 @@ def add_background(window):
     label = Label(window, image=image)
     label.place(x=0, y=0, relwidth=1, relheight=1)
 
-def set_button_setting(click_link, window, style_json_path = None):
+def set_button_setting(click_link, window, style_json_path = None, image = None):
     """Cette fonction crée un bouton avec le module customtkinter
     et les attributs de styles qui sont donné au bouton"""
     button = CTkButton(window, command=click_link)
-    
     if style_json_path is not None:
         style_button = Deserialization_json(style_json_path)
 
