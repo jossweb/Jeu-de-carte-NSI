@@ -74,6 +74,7 @@ def main_game_page():
     global card_set_player_1, card_set_player_2
     global score_player_1, score_player_2
     global first_lap
+    message = None
     if card_set_player_1 is None and card_set_player_2 is None:
         cards_dealt = cards_distribution(SET_CARDS)
         card_set_player_1 = cards_dealt[0]
@@ -87,23 +88,41 @@ def main_game_page():
                 temp_card_set_player_2 = card_set_player_2
                 shuffle(temp_card_set_player_1) 
                 shuffle(temp_card_set_player_1)
-                card_of_battle = (temp_card_set_player_1[0][1] + temp_card_set_player_1[1][1] + temp_card_set_player_1[2][1]
-                                   ,temp_card_set_player_2[0][1] + temp_card_set_player_2[1][1] + temp_card_set_player_2[2][1])
-                if temp_card_set_player_1[3][1] > temp_card_set_player_2[3][1]:
-                    score_player_1 += card_of_battle[1]
-                    print(f"Player 1 win the battle and add {card_of_battle[0]} to his score board")
-                    message = f"Le joueur 1 remporte la bataille et {card_of_battle[1]} points"
-                elif temp_card_set_player_1[3][1] < temp_card_set_player_2[3][1]:
-                    score_player_2 += card_of_battle[1]
-                    print(f"Player 2 win the battle and add {card_of_battle[1]} to his score board")
-                    message = f"Le joueur 2 remporte la bataille et {card_of_battle[1]} points"
-
-                first_lap = False
-                for i in range(4):
-                    card_1 = card(temp_card_set_player_1[i][0], temp_card_set_player_1[i][1])
+                if temp_card_set_player_1[0][1] > temp_card_set_player_2[0][1]:
+                    score_player_1 += temp_card_set_player_2[0][1]
+                    message = f"le joueur 1 remporte le tirage et {temp_card_set_player_2[0][1]} points"
+                    card_1 = card(temp_card_set_player_1[0][0], temp_card_set_player_1[0][1])
                     card_set_player_1 = card_1.remove_card(card_set_player_1)
-                    card_2 = card(temp_card_set_player_2[i][0], temp_card_set_player_2[i][1])
+                    card_2 = card(temp_card_set_player_2[0][0], temp_card_set_player_2[0][1])
                     card_set_player_2 = card_2.remove_card(card_set_player_2)
+                elif temp_card_set_player_1[0][1] < temp_card_set_player_2[0][1]:
+                    score_player_2 += temp_card_set_player_1[0][1]
+                    message = f"le joueur 2 remporte le tirage et {temp_card_set_player_1[0][1]} points"
+                    card_1 = card(temp_card_set_player_1[0][0], temp_card_set_player_1[0][1])
+                    card_set_player_1 = card_1.remove_card(card_set_player_1)
+                    card_2 = card(temp_card_set_player_2[0][0], temp_card_set_player_2[0][1])
+                    card_set_player_2 = card_2.remove_card(card_set_player_2)
+                else:
+                    score_of_battle = (temp_card_set_player_1[1][1] + temp_card_set_player_1[2][1] + temp_card_set_player_1[3][1]
+                        ,temp_card_set_player_2[1][1] + temp_card_set_player_2[2][1] + temp_card_set_player_2[3][1])
+                    if temp_card_set_player_1[3][1] > temp_card_set_player_2[3][1]:
+                        score_player_1 += score_of_battle[1]
+                        print(f"Player 1 win the battle and add {score_of_battle[0]} to his score board")
+                        message = f"Il y a eu bataille, le joueur 1 remporte la bataille et {score_of_battle[1]} points"
+                    elif temp_card_set_player_1[3][1] < temp_card_set_player_2[3][1]:
+                        score_player_2 += score_of_battle[1]
+                        print(f"Player 2 win the battle and add {score_of_battle[1]} to his score board")
+                        message = f"Il y a eu bataille, le joueur 2 remporte la bataille et {score_of_battle[1]} points"
+                        card_1 = card(temp_card_set_player_1[0][0], temp_card_set_player_1[0][1])
+                        card_set_player_1 = card_1.remove_card(card_set_player_1)
+                        card_2 = card(temp_card_set_player_2[0][0], temp_card_set_player_2[0][1])
+                        card_set_player_2 = card_2.remove_card(card_set_player_2)
+                        for i in range(1, 5):
+                            card_1 = card(temp_card_set_player_1[i][0], temp_card_set_player_1[i][1])
+                            card_set_player_1 = card_1.remove_card(card_set_player_1)
+                            card_2 = card(temp_card_set_player_2[i][0], temp_card_set_player_2[i][1])
+                            card_set_player_2 = card_2.remove_card(card_set_player_2)
+                first_lap = False
 
             scene_1 = scene(1, score_player_1, message = message)
             scene_1.print(window)
@@ -145,7 +164,7 @@ def result_page(score):
 
 class scene:
     def __init__(self, player_number, score, player_name = "joueur", message = None):
-        self.player_name = player_name
+        self.player_name = player_name 
         self.player_number = player_number
         self.score = score
         self.message = message
