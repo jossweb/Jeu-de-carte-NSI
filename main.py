@@ -3,6 +3,7 @@ from tkinter import *
 from tkinter import ttk
 from json import loads
 from random import randint, shuffle
+from webbrowser import *
 
 import customtkinter
 
@@ -85,9 +86,26 @@ def credits_page():
     canvas.create_image(0, 0, anchor=NW, image=BACKGROUND_IMAGE)
     # Ajout du texte de bienvenue
     canvas.create_text(230, 30, text="Crédits", font="calibri 30 italic", fill="black")
-    button = style.set_button_setting(lambda: redirect_welcome_page(window), window, "json/style_button_back_to_welcome.json")
-    canvas.create_window(55, 30, window=button)
+    canvas.create_text(230, 120, text="Créateurs :", font="calibri 14 normal", fill="black")
+    canvas.create_text(230, 145, text="FIGUEIRAS Jossua", font="calibri 14 normal", fill="black")
+    canvas.create_text(230, 165, text="DEMOURA William", font="calibri 14 normal", fill="black")
+    canvas.create_text(225, 185, text="Règle du jeu : La bataille ouverte ce joue a deux joueurs. Au départ", font="calibri 12 normal", fill="black")
+    canvas.create_text(225, 200, text="chaque joueur pose une carte au hasard, le joueur qui pose la carte", font="calibri 12 normal", fill="black")
+    canvas.create_text(225, 215, text="avec la valeur la plus élevé gagne les points, si les deux cartes ont", font="calibri 12 normal", fill="black")
+    canvas.create_text(225, 230, text="la même valeur alors il y a bataille et l'on recommence ce procédé", font="calibri 12 normal", fill="black")
+    canvas.create_text(225, 245, text="avec 3 cartes, ensuite les joueurs pose leurs cartes de façon", font="calibri 12 normal", fill="black")
+    canvas.create_text(225, 260, text="stratégique pour gagner le maximum de point et gagner la partie.", font="calibri 12 normal", fill="black")
+    canvas.create_text(225, 290, text="Outils :", font="calibri 14 normal", fill="black")
+    button_twinmotion = style.set_button_setting(lambda: redirect_web("https://www.twinmotion.com/en-US"), window, "json/style_button_redirect_twinmotion.json")
+    canvas.create_window(225, 330, window=button_twinmotion)
+    button_twinmotion = style.set_button_setting(lambda: redirect_web("https://customtkinter.tomschimansky.com/"), window, "json/style_button_redirect_custom_tkinter.json")
+    canvas.create_window(225, 380, window=button_twinmotion)
+    button_back = style.set_button_setting(lambda: redirect_welcome_page(window), window, "json/style_button_back_to_welcome.json")
+    canvas.create_window(55, 30, window=button_back)
     window.mainloop()
+
+def redirect_web(link):
+    open(link)
 
 def redirect_welcome_page(window):
     window.destroy()
