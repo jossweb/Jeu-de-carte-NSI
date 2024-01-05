@@ -60,7 +60,6 @@ def set_button_setting(click_link, window, style_json_path = None, image = None)
             bg_color = style_button.get("bg_color"),
             fg_color = style_button.get("fg_color"),
             text_color = style_button.get("text_color"),
-            hover_color = style_button.get("hover_color"),
             state = style_button.get("normal"),
             font = (font_family, font_size)
         )

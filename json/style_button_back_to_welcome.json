@@ -1,16 +1,16 @@
 {
-    "text": "+",
-    "width": 40,
+    "text": "accueil",
+    "width": 60,
     "height": 40,
     "corner_radius": 10,
-    "border_width": 2,
+    "border_width": 0,
     "border_color": "#000",
     "bg_color": "transparent",
-    "fg_color": "#ac99e6",
+    "fg_color": "#c1982a",
     "text_color" : "#000",
     "state": "normal",
     "font" : {
         "family": "Arial",
-        "size": 25
+        "size": 12
     }
 }

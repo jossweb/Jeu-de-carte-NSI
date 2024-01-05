@@ -66,20 +66,33 @@ def main_welcome_page():
     canvas.create_text(400, 140, text="Découvrez le jeu de la bataille ouverte", font="calibri 17 italic", fill="black")
     button = style.set_button_setting(lambda: play_button_click(window), window, "json/style_button_play.json")
     canvas.create_window(400, 300, window=button)
-    button = style.set_button_setting(lambda: credits_window(), window, "json/style_button_credits.json")
+    button = style.set_button_setting(lambda: redirect_credits(window), window, "json/style_button_credits.json")
     canvas.create_window(30, 370, window=button)
     window.mainloop()
 
-def credits_window():
+def redirect_credits(window):
+    """cette fonction sert a rediriger vers la fonction de la fenêtre credits lors du clique
+    sur le bouton associé a cette usage"""
+    window.destroy()
+    credits_page()
+
+def credits_page():
     window = create_window("credits")
     BACKGROUND_IMAGE = PhotoImage(file="images/background_credits.ppm")
-    #création du Canvas
     canvas = Canvas(window, width=450, height=600)
     canvas.pack()
-    #ajout de l'image en background
+    # Ajout de l'image en background
     canvas.create_image(0, 0, anchor=NW, image=BACKGROUND_IMAGE)
-    #ajout du texte de bienvenue
-    canvas.create_text(400, 30, text="Bienvenue", font="calibri 45 italic", fill="black")
+    # Ajout du texte de bienvenue
+    canvas.create_text(230, 30, text="Crédits", font="calibri 30 italic", fill="black")
+    button = style.set_button_setting(lambda: redirect_welcome_page(window), window, "json/style_button_back_to_welcome.json")
+    canvas.create_window(55, 30, window=button)
+    window.mainloop()
+
+def redirect_welcome_page(window):
+    window.destroy()
+    main_welcome_page()
+    
 
 def main_game_page():
     global card_set_player_1, card_set_player_2
@@ -205,9 +218,9 @@ class card:
         if self.path is not None:
             text_label = Label(window)
             text_label.place(relx=relx, rely=rely, anchor="center")
-
             bouton_image = Button(text_label, image=image, width=100, height=144, command= lambda: click_on_card(self.name, self.score, window))
-            bouton_image.photo = image  # Gardez une référence à l'image pour éviter la suppression par le garbage collector
+            # Garder une référence à l'image pour éviter la suppression par le garbage collector
+            bouton_image.photo = image  
             bouton_image.pack()
         else:
             return "Error: impossible to display content if path is not defined"
