@@ -1,7 +1,5 @@
 import tkinter
 from typing import Callable
-import darkdetect
-
 
 class AppearanceModeTracker:
 
@@ -44,13 +42,7 @@ class AppearanceModeTracker:
 
     @staticmethod
     def detect_appearance_mode() -> int:
-        try:
-            if darkdetect.theme() == "Dark":
-                return 1  # Dark
-            else:
-                return 0  # Light
-        except NameError:
-            return 0  # Light
+        return 0
 
     @classmethod
     def get_tk_root_of_widget(cls, widget):

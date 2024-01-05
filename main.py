@@ -96,6 +96,7 @@ def credits_page():
     canvas.create_text(225, 245, text="avec 3 cartes, ensuite les joueurs pose leurs cartes de façon", font="calibri 12 normal", fill="black")
     canvas.create_text(225, 260, text="stratégique pour gagner le maximum de point et gagner la partie.", font="calibri 12 normal", fill="black")
     canvas.create_text(225, 290, text="Outils :", font="calibri 14 normal", fill="black")
+    canvas.create_text(225, 440, text="*Liens vers site web extérieur à l'application", font="calibri 10 normal", fill="black")
     button_twinmotion = style.set_button_setting(lambda: redirect_web("https://www.twinmotion.com/en-US"), window, "json/style_button_redirect_twinmotion.json")
     canvas.create_window(225, 330, window=button_twinmotion)
     button_twinmotion = style.set_button_setting(lambda: redirect_web("https://customtkinter.tomschimansky.com/"), window, "json/style_button_redirect_custom_tkinter.json")
